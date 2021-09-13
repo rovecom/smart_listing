@@ -3,6 +3,8 @@ en:
     msgs:
       destroy_confirmation: Destroy?
       no_items: No items
+      accept: Yes
+      deny: No
     actions:
       destroy: Destroy
       edit: Edit

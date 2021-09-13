@@ -1,3 +1,8 @@
+1.2.4
+-----------
+
+- Added translation for confirm and deny
+
 1.2.3
 -----------
 

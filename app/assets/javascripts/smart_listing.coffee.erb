@@ -81,7 +81,7 @@ class window.SmartListing
       false
 
     @container.on "click", "#{SmartListing.config.class_name("item_actions")} a[data-#{SmartListing.config.data_attribute("confirmation")}]", (event) =>
-      $.fn.smart_listing.confirm $(event.currentTarget), $(event.currentTarget).data(SmartListing.config.data_attribute("confirmation"))
+      $.fn.smart_listing.confirm $(event.currentTarget), $(event.currentTarget).data(SmartListing.config.data_attribute("confirmation")), $(event.currentTarget).data("accept"), $(event.currentTarget).data("deny")
 
     @container.on "click", "#{SmartListing.config.class_name("item_actions")} a[data-#{SmartListing.config.data_attribute("popover")}]", (event) =>
       name = $(event.currentTarget).data(SmartListing.config.data_attribute("popover"))
@@ -333,12 +333,12 @@ $.fn.smart_listing.showPopover = (elem, body) ->
   elem.popover(content: body, html: true, trigger: "manual")
   elem.popover("show")
 
-$.fn.smart_listing.showConfirmation = (confirmation_elem, msg, confirm_callback) ->
-  buildPopover = (confirmation_elem, msg) ->
+$.fn.smart_listing.showConfirmation = (confirmation_elem, msg, acceptMsg, denyMsg, confirm_callback) ->
+  buildPopover = (confirmation_elem, msg, acceptMsg, denyMsg) ->
     deletion_popover = $("<div/>").addClass("confirmation_box")
     deletion_popover.append($("<p/>").html(msg))
     deletion_popover.append($("<p/>")
-      .append($("<button/>").html("Yes").addClass("btn btn-danger ").click (event) =>
+      .append($("<button/>").html(acceptMsg).addClass("btn btn-danger ").click (event) =>
         # set @confirmed element and emulate click on icon
         editable = $(event.currentTarget).closest(SmartListing.config.class_name("editable"))
         confirm_callback(confirmation_elem)
@@ -346,18 +346,18 @@ $.fn.smart_listing.showConfirmation = (confirmation_elem, msg, confirm_callback)
         $(confirmation_elem).popover(SmartListing.config.bootstrap_commands("popover_destroy"))
       )
       .append(" ")
-      .append($("<button/>").html("No").addClass("btn btn-small").click (event) =>
+      .append($("<button/>").html(denyMsg).addClass("btn btn-small").click (event) =>
         editable = $(event.currentTarget).closest(SmartListing.config.class_name("editable"))
         $(confirmation_elem).popover(SmartListing.config.bootstrap_commands("popover_destroy"))
       )
     )
 
-  $.fn.smart_listing.showPopover confirmation_elem, buildPopover(confirmation_elem, msg)
+  $.fn.smart_listing.showPopover confirmation_elem, buildPopover(confirmation_elem, msg, acceptMsg, denyMsg)
 
-$.fn.smart_listing.confirm = (elem, msg) ->
+$.fn.smart_listing.confirm = (elem, msg, acceptMsg, denyMsg) ->
   if !elem.data("confirmed")
     # We need confirmation
-    $.fn.smart_listing.showConfirmation elem, msg, (confirm_elem) =>
+    $.fn.smart_listing.showConfirmation elem, msg, acceptMsg, denyMsg, (confirm_elem) =>
       confirm_elem.data("confirmed", true)
     false
   else

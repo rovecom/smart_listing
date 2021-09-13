@@ -1,0 +1,17 @@
+nl:
+  smart_listing:
+    msgs:
+      destroy_confirmation: Verwijder?
+      no_items: Geen items
+      accept: Ja
+      deny: Nee
+    actions:
+      destroy: Verwijder
+      edit: Bewerk
+      show: Toon
+      new: Nieuw item
+  views:
+    pagination:
+      per_page: Per pagina
+      unlimited: Oneindig
+      total: Totaal

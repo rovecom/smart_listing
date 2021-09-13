@@ -55,6 +55,8 @@ SmartListing.configure do |config|
     #:main                  => "smart-listing",
     #:controls_initialized  => "smart-listing-controls-initialized",
     #:confirmation          => "confirmation",
+    #:accept                => "accept",
+    #:deny                  => "deny",
     #:id                    => "id",
     #:href                  => "href",
     #:callback_href         => "callback-href",
