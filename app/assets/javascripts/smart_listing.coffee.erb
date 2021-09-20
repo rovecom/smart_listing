@@ -330,7 +330,7 @@ $.fn.smart_listing.observeField = (field, opts = {}) ->
 
 $.fn.smart_listing.showPopover = (elem, body) ->
   elem.popover(SmartListing.config.bootstrap_commands("popover_destroy"))
-  elem.popover(content: body, html: true, trigger: "manual")
+  elem.popover(content: body, html: true, trigger: "manual", placement: "left")
   elem.popover("show")
 
 $.fn.smart_listing.showConfirmation = (confirmation_elem, msg, acceptMsg, denyMsg, confirm_callback) ->
